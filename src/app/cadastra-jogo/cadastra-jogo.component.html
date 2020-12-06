@@ -1,0 +1,65 @@
+<body class="body">
+    <div class="container">
+        <div class="centralizar">
+            <mat-card class="card-cadastro">
+                <mat-card-title>
+                    Cadastro de Jogos
+                </mat-card-title>
+                <form class="cadastro-form" [formGroup]="gameForm">
+                    <div class="row">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Console</mat-label>
+                            <mat-select formControlName="console">
+                                <mat-option *ngFor="let console of consoles" [value]="console.value">
+                                    {{console.texto}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="type-product">
+                        <div class="row">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Título</mat-label>
+                                <input matInput placeholder="Título" formControlName="titulo">
+                            </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Resumo</mat-label>
+                                <textarea matInput placeholder="Resumo" formControlName="resumo"></textarea>
+                            </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Desenvolvedor</mat-label>
+                                <input matInput placeholder="Desenvolvedor" formControlName="desenvolvedor">
+                            </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Gênero</mat-label>
+                                <input matInput placeholder="Gênero" formControlName="genero">
+                            </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <input style="display: none" type="file" (change)="readURL($event);" #fileInput>
+                            <button (click)="fileInput.click()" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                                <mat-icon>publish</mat-icon>
+                                <mat-label>Enviar imagem</mat-label>
+                            </button>
+                        </div>
+
+                        <div class="row">
+                            <img [src]="imageSrc" alt="your image" *ngIf="imageSrc" />
+                        </div>
+                    </div>
+                    <br>
+                    <div class="buttons">
+                        <div class="buttons"><button mat-raised-button class="button-cadastrar" (click)="onUpload()" [disabled]="!this.gameForm.valid">Cadastrar</button></div>
+                        <div class="buttons"><button mat-raised-button class="button-voltar" (click)="goBack()">Voltar</button></div>
+                    </div>
+                </form>
+            </mat-card>
+        </div>
+    </div>
+</body>

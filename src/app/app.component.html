@@ -1,0 +1,47 @@
+<div class="container">
+    <mat-toolbar class="topnav">
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="drawer.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <span>Anuncia Aí</span>
+        <span class="example-spacer"></span>
+        <form class="example-form">
+            <mat-form-field class="example-full-width">
+                <input type="text" placeholder="Procure um jogo" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                        {{option}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </form>
+        <span>{{usuario}}</span>
+        <button mat-icon-button *ngIf="perfil == 3" class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" matTooltip="Logar" [routerLinkActive]="'active'" [routerLink]="['login']">
+            <mat-icon>login</mat-icon>
+        </button>
+        <button mat-icon-button *ngIf="perfil == 0 || perfil == 1" class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" matTooltip="Deslogar" (click)="desloga()">
+            <mat-icon>power_settings_new</mat-icon>
+        </button>
+        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" matTooltip="Cadastrar jogo" (click)="toCadastra()">
+            <mat-icon [matBadge]="onBadge()" matBadgeColor="warn">sports_esports</mat-icon>
+        </button>
+    </mat-toolbar>
+    <mat-drawer-container class="container-sidebar" autosize>
+        <mat-drawer #drawer class="example-sidenav" mode="side" opened>
+
+            <mat-selection-list #shoes [multiple]="false">
+                <mat-list-option [routerLinkActive]="'active'" [routerLink]="['xbox']">Xbox</mat-list-option>
+                <mat-list-option [routerLinkActive]="'active'" [routerLink]="['playstation']">Playstation
+                </mat-list-option>
+                <mat-list-option [routerLinkActive]="'active'" [routerLink]="['switch']">
+                    Switch</mat-list-option>
+                <mat-list-option [routerLinkActive]="'active'" [routerLink]="['pc']">PC
+                </mat-list-option>
+            </mat-selection-list>
+        </mat-drawer>
+        <div class="content">
+            <router-outlet #carrinho></router-outlet>
+        </div>
+
+    </mat-drawer-container>
+</div>
