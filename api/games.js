@@ -8,6 +8,7 @@ var gamesSchema = new mongoose.Schema({
     genero: String,
     avaliacao: Number,
     console: String,
+    url: String
 }, { collection: 'games' });
 
 module.exports = { Mongoose: mongoose, GamesSchema: gamesSchema }
