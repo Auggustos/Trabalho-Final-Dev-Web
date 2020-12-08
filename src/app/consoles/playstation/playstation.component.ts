@@ -15,9 +15,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PlaystationComponent implements OnInit {
 
-  url = "http://localhost:3000/";
   games = [];
-
 
   constructor(private http: HttpClient, private apiService: ApiService, private authService: AuthService, private dialogService: DialogService, private router: Router,
     public dialog: MatDialog) { }
@@ -30,9 +28,7 @@ export class PlaystationComponent implements OnInit {
   itensSidebar: string[] = ['Meus dados', 'Minhas compras'];
 
   ngOnInit(): void {
-
-
-    this.http.get(`${this.url}games`)
+    this.apiService.getGames()
       .subscribe(response => {
         let gamesAux;
 

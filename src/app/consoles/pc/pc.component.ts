@@ -15,7 +15,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./pc.component.css']
 })
 export class PcComponent implements OnInit {
-url = "http://localhost:3000/";
+
 games = [];
 
 
@@ -31,21 +31,18 @@ quantidadeProduto: { id: string, quantidade: number }[] = [];
 itensSidebar: string[] = ['Meus dados', 'Minhas compras'];
 
 ngOnInit(): void {
+  this.apiService.getGames()
+  .subscribe(response => {
+    let gamesAux;
 
-
-  this.http.get(`${this.url}games`)
-    .subscribe(response => {
-      let gamesAux;
-
-      gamesAux = response;
-      gamesAux.forEach(game =>{
-        if(game.console =='pc'){
-          this.games.push(game)
-        }
-      })
-      console.log(this.games)
+    gamesAux = response;
+    gamesAux.forEach(game => {
+      if (game.console == 'pc') {
+        this.games.push(game)
+      }
     })
-
+    console.log(this.games)
+  })
 }
 
 toReviews(idGame: string) {

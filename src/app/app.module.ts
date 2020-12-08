@@ -33,6 +33,7 @@ import { ReviewsComponent } from './reviews/reviews.component';
 import { ModalCadastrarReviewComponent } from './modal-cadastrar-review/modal-cadastrar-review.component';
 import { TelaLoginComponent } from './tela-login/tela-login.component';
 import { CadastraUsuarioComponent } from './cadastra-usuario/cadastra-usuario.component';
+import { TelaInicialComponent } from './tela-inicial/tela-inicial.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { CadastraUsuarioComponent } from './cadastra-usuario/cadastra-usuario.co
     ReviewsComponent,
     ModalCadastrarReviewComponent,
     TelaLoginComponent,
-    CadastraUsuarioComponent
+    CadastraUsuarioComponent,
+    TelaInicialComponent
   ],
   imports: [
     BrowserAnimationsModule,

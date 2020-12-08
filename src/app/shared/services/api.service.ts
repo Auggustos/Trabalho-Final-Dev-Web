@@ -8,10 +8,14 @@ import { Pedido } from 'src/app/classes/Pedido.class';
   providedIn: 'root'
 })
 export class ApiService {
-
+  url = "http://localhost:3000/";
   constructor(private http: HttpClient) { }
 
+  getGames(): Observable<any> {
+   return this.http.get<any>(`${this.url}games`);
+  }
 }
+
 
 /*  postUsuario(body): Observable<any> { // cria um usuário
     return this.http.post(`${this.url}/users`, body)

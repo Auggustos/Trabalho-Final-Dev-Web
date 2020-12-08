@@ -15,7 +15,6 @@ import { HttpClient } from '@angular/common/http';
 })
 export class XboxComponent implements OnInit {
 
-  url = "http://localhost:3000/";
   games = [];
 
 
@@ -30,8 +29,7 @@ export class XboxComponent implements OnInit {
   itensSidebar: string[] = ['Meus dados', 'Minhas compras'];
 
   ngOnInit(): void {
-
-    this.http.get(`${this.url}games`)
+    this.apiService.getGames()
       .subscribe(response => {
         let gamesAux;
 
