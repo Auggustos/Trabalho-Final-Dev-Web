@@ -14,7 +14,7 @@ import { AuthService } from '../shared/services/auth.service';
 export class CadastraJogoComponent implements OnInit {
 
   constructor(private dialogService: DialogService, private router: Router, private apiSevice: ApiService, private authService: AuthService) { }
-  url = "http://localhost:3000/api/";
+  url = "http://localhost:3000/";
   uploadData = new FormData();
 
   selectedFile: File

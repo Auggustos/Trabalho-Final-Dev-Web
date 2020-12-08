@@ -14,8 +14,8 @@
                 </div>
             </mat-card-subtitle>
         </mat-card-header>
-        <div class="mat-content" (click)="toReviews(game._id)">
-            <img mat-card-image src="../../../assets/images/placa-de-pare.png" class="imagem-produto">
+        <div class="mat-content" (click)="toReviews(game.nome)">
+            <img mat-card-image src="{{game.url}}" class="imagem-produto">
             <mat-card-content>
                 <span style="font-weight: bold;">Resumo: </span>
                 <p>

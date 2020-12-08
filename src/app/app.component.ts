@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
   myControl = new FormControl();
   options: string[] = [];
   filteredOptions: Observable<string[]>;
-  url = "http://localhost:3000/api/";
+  url = "http://localhost:3000/";
   title = 'Sistema-Horti-Fruti';
 
   badge: number;

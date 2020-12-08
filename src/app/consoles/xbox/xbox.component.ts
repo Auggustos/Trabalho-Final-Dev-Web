@@ -21,7 +21,7 @@ export class XboxComponent implements OnInit {
   length = 100;
   pageSize = 10;
   pageSizeOptions: number[] = [5, 10, 25, 100];
-  url = "http://localhost:3000/api/";
+  url = "http://localhost:3000/";
   games = [];
   // MatPaginator Output
   pageEvent: PageEvent;
@@ -179,6 +179,7 @@ export class XboxComponent implements OnInit {
 
   }
   toReviews(idGame: string) {
+    //var str = strDefault.replace(/\s/g, '');
     let url = 'ID/reviews';
     this.router.navigateByUrl(url.replace('ID',idGame)).then(success => location.reload())
   }
