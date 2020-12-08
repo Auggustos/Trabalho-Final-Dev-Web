@@ -31,6 +31,9 @@ import { PcComponent } from './consoles/pc/pc.component';
 import { CadastraJogoComponent } from './cadastra-jogo/cadastra-jogo.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { ModalCadastrarReviewComponent } from './modal-cadastrar-review/modal-cadastrar-review.component';
+import { TelaLoginComponent } from './tela-login/tela-login.component';
+import { CadastraUsuarioComponent } from './cadastra-usuario/cadastra-usuario.component';
+
 
 @NgModule({
   declarations: [
@@ -43,8 +46,8 @@ import { ModalCadastrarReviewComponent } from './modal-cadastrar-review/modal-ca
     CadastraJogoComponent,
     ReviewsComponent,
     ModalCadastrarReviewComponent,
-
-
+    TelaLoginComponent,
+    CadastraUsuarioComponent
   ],
   imports: [
     BrowserAnimationsModule,
