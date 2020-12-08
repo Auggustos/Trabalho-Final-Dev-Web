@@ -30,6 +30,7 @@ import { SwitchComponent } from './consoles/switch/switch.component';
 import { PcComponent } from './consoles/pc/pc.component';
 import { CadastraJogoComponent } from './cadastra-jogo/cadastra-jogo.component';
 import { ReviewsComponent } from './reviews/reviews.component';
+import { ModalCadastrarReviewComponent } from './modal-cadastrar-review/modal-cadastrar-review.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { ReviewsComponent } from './reviews/reviews.component';
     PcComponent,
     CadastraJogoComponent,
     ReviewsComponent,
+    ModalCadastrarReviewComponent,
 
 
   ],
@@ -83,6 +85,7 @@ import { ReviewsComponent } from './reviews/reviews.component';
     DialogService
   ],
   entryComponents: [
+    ModalCadastrarReviewComponent
   ],
   bootstrap: [AppComponent]
 })

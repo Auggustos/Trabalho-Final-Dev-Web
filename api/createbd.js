@@ -69,7 +69,7 @@ module.exports = function createDatabase() {
             console.log("Number of documents inserted: " + res.insertedCount);
             db.close();
         });
-        dbo.collection("reviews").insertMany(reviewObj, function(err, res) {
+        dbo.collection("review").insertMany(reviewObj, function(err, res) {
             if (err) throw err;
             console.log("Number of documents inserted: " + res.insertedCount);
             db.close();

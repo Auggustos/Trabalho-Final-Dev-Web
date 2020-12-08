@@ -1,0 +1,21 @@
+<div>
+    <form class="cadastro-form" [formGroup]="reviewForm">
+        <div class="row">
+            <mat-form-field class="example-full-width">
+                <mat-label>Nota do jogo(0 a 10)</mat-label>
+                <input matInput type="number" formControlName="nota" name="avaliacao" min="0" max="10">
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field class="example-full-width">
+                <mat-label>Opinião</mat-label>
+                <textarea matInput placeholder="Opinião" formControlName="opiniao"></textarea>
+            </mat-form-field>
+        </div>
+        <div class="buttons">
+            <div class="buttons"><button mat-raised-button class="button-cadastrar" (click)="cadastraReview()" [disabled]="!this.reviewForm.valid">Cadastrar</button></div>
+            <div class="buttons"><button mat-raised-button mat-dialog-close class="button-voltar">Voltar</button></div>
+        </div>
+    </form>
+
+</div>

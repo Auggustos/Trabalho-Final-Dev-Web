@@ -77,5 +77,8 @@ body {
 .button-cadastrar {
     background-color: #4CB258;
     color: white;
-    width: 215%;
+}
+
+.example-card {
+    width: 500%;
 }
