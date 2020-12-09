@@ -29,7 +29,6 @@
 .container-card {
     margin-left: 15px;
     margin-right: 15px;
-    margin-bottom: 5px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-column-gap: 10px;
@@ -83,4 +82,9 @@ body {
 
 .example-card {
     width: 98%;
+}
+
+.card-content {
+    margin-bottom: 5px;
+    margin-top: 5px;
 }

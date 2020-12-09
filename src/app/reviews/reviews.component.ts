@@ -16,6 +16,7 @@ export class ReviewsComponent implements OnInit {
   idGame = '';
   nomeGame = '';
   gameObj: any;
+  podeCadastrar = false;
   url = "http://localhost:3000/";
   constructor(private http: HttpClient, private apiService: ApiService, private authService: AuthService, private dialogService: DialogService, private router: Router,
     public dialog: MatDialog, private route: ActivatedRoute) {
@@ -23,6 +24,7 @@ export class ReviewsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.podeCadastrar = this.authService.isLoggedIn();
     this.gameObj = JSON.parse(this.authService.getGame());
     this.apiService.getReview(this.idGame)
       .subscribe(response => {
