@@ -2,9 +2,7 @@
 
 <div class="container">
 
-
-
-  <select (change)="filterBySelect($event.target.value)" [(ngModel)]="keyword">
+  <select (change)="filterBySelect()" [(ngModel)]="keyword">
     <option default *ngFor="let item of keywords" [value]="item">{{item}}</option>
   </select>
 

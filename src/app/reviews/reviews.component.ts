@@ -14,6 +14,7 @@ import { ModalCadastrarReviewComponent } from '../modal-cadastrar-review/modal-c
 export class ReviewsComponent implements OnInit {
   reviews = [];
   idGame = '';
+  nomeGame = '';
   url = "http://localhost:3000/";
   constructor(private http: HttpClient, private apiService: ApiService, private authService: AuthService, private dialogService: DialogService, private router: Router,
     public dialog: MatDialog, private route: ActivatedRoute) {
@@ -46,6 +47,7 @@ export class ReviewsComponent implements OnInit {
       height: '601px',
       data: {
         idGame: this.idGame,
+        nomeGame: this.nomeGame,
       }
     });
     //}
