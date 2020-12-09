@@ -2,6 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ApiService } from '../shared/services/api.service';
+import { AuthService } from '../shared/services/auth.service';
+import { DialogService } from '../shared/services/dialog/dialog.service';
 
 @Component({
   selector: 'app-modal-cadastrar-review',
@@ -10,7 +13,9 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class ModalCadastrarReviewComponent implements OnInit {
   url = "http://localhost:3000/";
-  constructor(private http: HttpClient,@Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor( private apiService: ApiService, private dialogService: DialogService,private authService: AuthService,private http: HttpClient,@Inject(MAT_DIALOG_DATA) public data: any) { 
+    console.log(data)
+  }
 
   reviewForm = new FormGroup({
     nota: new FormControl('', Validators.compose([
@@ -27,12 +32,19 @@ export class ModalCadastrarReviewComponent implements OnInit {
     console.log('entrei')
     const body = this.loadBody();
     console.log(body)
-    this.http.post(`${this.url}review`, body).pipe();
-  }
+    this.apiService.criarReview(body,this.authService.token).subscribe(success =>{
+      this.dialogService.showSuccess(`Review cadastrado com sucesso!`,"Cadastro Concluido").then(result => {
+       location.reload()
+      });
+    },
+    error => {
+      this.dialogService.showError(`${error.error.message}`, "Algo deu errado!")
+    }); 
+    }
 
   loadBody() {
     return {
-      nome: this.data.nomeGame,
+      idGame: this.data.idGame,
       nota: this.reviewForm.value.nota,
       opiniao: this.reviewForm.value.opiniao
     }

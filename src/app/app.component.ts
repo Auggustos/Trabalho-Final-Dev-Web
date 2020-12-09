@@ -28,32 +28,25 @@ export class AppComponent implements OnInit {
   }
   carrinho;
   usuario = '';
-  perfil = 3;
+  logado = false;
 
   ngOnInit() {
-
-    /* if (!this.authService.isLoggedIn()) {
-          this.usuario = '';
-          this.perfil = 3;
-        } else {
-          if (this.authService.getUser().length > 1) {
-            let userId = this.authService.getUserId();
-            this.apiService.getUsuario(userId).subscribe(response => {
-              this.usuario = response.nome;
-              this.perfil = parseInt(this.authService.getPerfil());
-            });
-    
-          }
-        } */
+    if (!this.authService.isLoggedIn()) {
+      this.logado = this.authService.isLoggedIn();
+      this.usuario = '';
+    } else {
+      if (this.authService.getUser().length > 1) {
+        this.usuario = this.authService.getUser()
+        this.logado = this.authService.isLoggedIn();
+      }
+    }
   }
   desloga() {
     location.reload();
     this.authService.logout();
     this.usuario = this.authService.getUser();
-    this.perfil = parseInt(this.authService.getPerfil());
     if (!this.authService.isLoggedIn()) {
       this.usuario = '';
-      this.perfil = 3;
     }
     this.dialogService.showSuccess("Logout realizado com sucesso!", "Logout");
   }
@@ -69,7 +62,13 @@ export class AppComponent implements OnInit {
   }
 
   toCadastra() {
-    this.router.navigate(['/cadastra-jogo']);
+    if (!this.authService.isLoggedIn()) {
+      this.dialogService.showWarning("Você precisa estar logado para cadastrar algum jogo!", "Autentique-se!").then(result => {
+        this.router.navigateByUrl('login').then(success => location.reload())
+      })
+    } else {
+      this.router.navigate(['/cadastra-jogo']);
+    }
   }
 
   onBadge() {

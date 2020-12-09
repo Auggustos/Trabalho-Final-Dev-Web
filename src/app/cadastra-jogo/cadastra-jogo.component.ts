@@ -36,6 +36,9 @@ export class CadastraJogoComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    console.log(this.authService.token)
+    console.log(this.authService.getUser());
+  //  this.authService.logout();
   }
   goBack() {
     window.history.back();
@@ -59,36 +62,25 @@ export class CadastraJogoComponent implements OnInit {
   }
 
   onUpload() {
-   /*  const uploadData = new FormData();
-    uploadData.append('imagem', this.selectedFile);
-    uploadData.append('nome', this.gameForm.value.nome);
-    uploadData.append('descricao', this.gameForm.value.descricao);
-    uploadData.append('preco', this.gameForm.value.preco);
-    uploadData.append('quantidade', this.gameForm.value.quantidade);
-    uploadData.append('id_usuario', this.gameForm.value.id_usuario);
-      this.http.get(`${this.url}games`)
-    .subscribe(response => {
-      let gamesAux;
-
-      gamesAux = response;
-      gamesAux.forEach(game =>{
-        if(game.console =='pc'){
-          this.games.push(game)
-        }
-      })
-      console.log(this.games)
-    })
-    this.apiSevice.postProdutos(uploadData)
+     const uploadData = new FormData();
+    uploadData.append('file', this.selectedFile);
+    uploadData.append('titulo', this.gameForm.value.titulo);
+    uploadData.append('resumo', this.gameForm.value.resumo);
+    uploadData.append('desenvolvedor', this.gameForm.value.desenvolvedor);
+    uploadData.append('genero', this.gameForm.value.genero);
+    uploadData.append('console', this.gameForm.value.console);
+      
+    this.apiSevice.criarGames(uploadData,this.authService.token)
       .subscribe(
         success => {
-          this.dialogService.showSuccess(`${this.gameForm.value.nome} cadastrado com sucesso!`, "Produto Cadastrado!").then(result => {
+          this.dialogService.showSuccess(`${this.gameForm.value.titulo} cadastrado com sucesso!`, "Jogo Cadastrado!").then(result => {
             this.router.navigateByUrl('').then(success => location.reload())
           });
         },
         error => {
           this.dialogService.showError(`${error.error.error}`, "Erro no Cadastro!");
         }
-      ); */
+      ); 
   }
 
 }

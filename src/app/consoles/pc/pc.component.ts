@@ -34,23 +34,7 @@ quantidadeProduto: { id: string, quantidade: number }[] = [];
 itensSidebar: string[] = ['Meus dados', 'Minhas compras'];
 
 ngOnInit(): void {
-  this.apiService.getGames()
-  .subscribe(response => {
-    let gamesAux;
 
-    gamesAux = response;
-    gamesAux.forEach(game => {
-      if (game.console == 'pc') {
-        this.games.push(game)
-        this.options.push(game.nome)
-      }
-    })
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value))
-    );
-    console.log(this.games)
-  })
 }
 
 private _filter(value: string): string[] {

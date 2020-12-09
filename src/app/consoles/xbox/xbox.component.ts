@@ -18,45 +18,115 @@ import { Observable } from 'rxjs';
 
 export class XboxComponent implements OnInit {
 
+  games$ : Observable<any[]>
+  generos: string[] = [];
+  desenvolvedores: string[] = [];
+  nomes: string[] = [];
+
+  gamesFiltered = []
+  keywords = ['Nome', 'Desenvolvedor', 'Gênero'];
+  keyword = '';
+
   myControl = new FormControl();
   options: any[] = [];
-  filteredOptions: Observable<string[]>;
+  desenvolvedorControl = new FormControl()
+  nomeControl = new FormControl()
+  generoControl = new FormControl()
+  filteredOptions: Observable<any[]>;
   games = [];
-
+  idUser ='';
   constructor(private fb: FormBuilder, private http: HttpClient, private apiService: ApiService, private authService: AuthService, private dialogService: DialogService, private router: Router,
-    public dialog: MatDialog, private changeDetectorRefs: ChangeDetectorRef) { }
+    public dialog: MatDialog, private changeDetectorRefs: ChangeDetectorRef) {
+      this.getGames();
+      this.filterBySelect();
+
+     }
 
   showFiller = false;
 
+  getGames(){
+    this.games$ = this.apiService.getGames('xbox')
+    this.filtraArrayProAutoComplete()
+  }
   ngOnInit(): void {
-    this.apiService.getGames()
-      .subscribe(response => {
-        let gamesAux;
-        gamesAux = response;
-        gamesAux.forEach(game => {
-          if (game.console == 'xbox') {
-            this.options.push(game)
-            this.games.push(game)
-          }
-        })
-        this.filteredOptions = this.myControl.valueChanges
-          .pipe(
-            startWith(''),
-            map(value => this._filter(value))
-          );
-          console.log(this.filteredOptions)
-      })
+    this.idUser = this.authService.getUserId();
   }
 
-  private _filter(value: string): string[] {
+  filterBySelect() : void {
+
+    //clear inputs
+    this.desenvolvedorControl.setValue('')
+    this.nomeControl.setValue('')
+    this.generoControl.setValue('')
+    if(this.keyword == "Gênero"){
+      this.filteredOptions = this.generoControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(2, value))
+      );
+    }else if(this.keyword == "Nome"){
+      this.filteredOptions = this.nomeControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(0, value))
+      );
+    }else if(this.keyword == "Desenvolvedor"){
+      this.filteredOptions = this.desenvolvedorControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(1, value))
+      );
+    }else{
+      this.filteredOptions = this.games$.pipe(map(res => res.filter(v => v).slice(0,3))
+      )}
+  }
+
+
+  /* 0 - nome
+  1 - dev
+  2 - genero */
+  private _filter(op: number, value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.options.filter(option => option.nome.toLowerCase().includes(filterValue));
+    const options = [
+      "nome",
+      "desenvolvedor",
+      "genero"
+    ]
+    return this.gamesFiltered.filter(option => option[options[op]].toLowerCase().includes(filterValue)).slice(0,3);
   }
 
   toReviews(idGame: string) {
-    let url = 'ID/reviews';
+    let url = 'reviews/ID';
     this.router.navigateByUrl(url.replace('ID', idGame)).then(success => location.reload())
+  }
+  aux;
+  filtraArrayProAutoComplete(){
+    this.games$.subscribe((responses) => {
+      this.gamesFiltered = responses
+
+    this.gamesFiltered.forEach((item) => {
+        if(!this.generos.includes(item.genero)){
+          this.generos.push(item.genero)
+        }
+
+        if(!this.desenvolvedores.includes(item.desenvolvedor)){
+          this.desenvolvedores.push(item.desenvolvedor)
+        }
+
+        if(!this.nomes.includes(item.nome)){
+          this.nomes.push(item.nome)
+        }
+
+    })
+
+    })
+
+
+
+
+
+
   }
 
 

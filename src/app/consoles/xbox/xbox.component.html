@@ -1,22 +1,47 @@
-<div class="search-bar">
-    <form class="example-form">
-        <mat-form-field class="example-full-width">
-            <input type="text" placeholder="Procure um jogo" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
-            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                <mat-option *ngFor="let option of filteredOptions | async" [value]="option.nome">
-                    {{option.nome}}
-                </mat-option>
-            </mat-autocomplete>
-        </mat-form-field>
-        <!--   <button mat-icon-button class="example-icon favorite-icon" matTooltip="Cadastrar jogo" (click)="filtrar()">
-            <mat-icon matBadgeColor="warn">search</mat-icon>
-        </button> -->
-    </form>
-</div>
+
+
+<div class="container">
+
+  <select (change)="filterBySelect()" [(ngModel)]="keyword">
+    <option default *ngFor="let item of keywords" [value]="item">{{item}}</option>
+  </select>
+
+  <mat-form-field class="example-full-width" *ngIf="keyword == 'Nome'">
+    <input type="text" placeholder="Digite um nome." aria-label="Name" matInput [formControl]="nomeControl" [matAutocomplete]="auto1">
+    <mat-autocomplete #auto1="matAutocomplete">
+        <mat-option *ngFor="let option of nomes" [value]="option">
+            {{option}}
+        </mat-option>
+    </mat-autocomplete>
+</mat-form-field>
+
+<mat-form-field class="example-full-width" *ngIf="keyword == 'Desenvolvedor'">
+  <input type="text" placeholder="Digite um desenvolvedor." aria-label="Desenvolvedor" matInput [formControl]="desenvolvedorControl" [matAutocomplete]="auto2">
+  <mat-autocomplete #auto2="matAutocomplete">
+      <mat-option *ngFor="let option of desenvolvedores" [value]="option">
+          {{option}}
+      </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
+
+<mat-form-field class="example-full-width" *ngIf="keyword == 'Gênero'">
+  <input type="text" placeholder="Digite um gênero." aria-label="Gênero" matInput [formControl]="generoControl" [matAutocomplete]="auto3">
+  <mat-autocomplete #auto3="matAutocomplete">
+      <mat-option *ngFor="let option of generos" [value]="option">
+          {{option}}
+      </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
+
+
+
+
+
+  </div>
 <div class="container-card">
     <mat-card class="example-card" *ngFor="let option of filteredOptions | async" [value]="option">
         <mat-card-header class="teste-pai">
-            <mat-card-title (click)="toReviews(option.nome)">{{option.nome}} </mat-card-title>
+            <mat-card-title (click)="toReviews(option._id)">{{option.nome}} </mat-card-title>
             <mat-card-subtitle>
                 <div>
                     <span><span style="font-weight: bold;">Desenvolvedor:</span> {{option.desenvolveror}}</span>
@@ -29,7 +54,7 @@
                 </div>
             </mat-card-subtitle>
         </mat-card-header>
-        <div class="mat-content" (click)="toReviews(option.nome)">
+        <div class="mat-content" (click)="toReviews(option._id)">
             <img mat-card-image src="{{option.url}}" class="imagem-produto">
             <mat-card-content>
                 <span style="font-weight: bold;">Resumo: </span>

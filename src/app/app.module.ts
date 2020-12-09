@@ -34,7 +34,8 @@ import { ModalCadastrarReviewComponent } from './modal-cadastrar-review/modal-ca
 import { TelaLoginComponent } from './tela-login/tela-login.component';
 import { CadastraUsuarioComponent } from './cadastra-usuario/cadastra-usuario.component';
 import { TelaInicialComponent } from './tela-inicial/tela-inicial.component';
-
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import { ApiService } from './shared/services/api.service';
 
 @NgModule({
   declarations: [
@@ -74,10 +75,12 @@ import { TelaInicialComponent } from './tela-inicial/tela-inicial.component';
     MatCardModule,
     MatListModule,
     FormsModule,
+    AutocompleteLibModule
   ],
   providers: [
     AuthService,
     AuthGuard,
+    ApiService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

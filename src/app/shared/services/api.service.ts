@@ -4,15 +4,26 @@ import { Produto } from '../../classes/produto.class';
 import { Usuario } from '../../classes/usuario.class';
 import { Observable, of } from 'rxjs';
 import { Pedido } from 'src/app/classes/Pedido.class';
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ApiService {
   url = "http://localhost:3000/";
   constructor(private http: HttpClient) { }
 
-  getGames(): Observable<any> {
-   return this.http.get<any>(`${this.url}games`);
+  getGames(consoleOp): Observable<any> {
+    return this.http.get<any>(`${this.url}games/${consoleOp}`);
+  }
+
+  getReview(idGame): Observable<any> {
+    return this.http.get<any>(`${this.url}games/${idGame}`);
+  }
+  criarUser(body): Observable<any> {
+    return this.http.post<any>(`${this.url}users/`,body).pipe();
+  }
+  criarGames(body,token): Observable<any> {
+    return this.http.post<any>(`${this.url}games`,body).pipe();
+  }
+  criarReview(body,token): Observable<any> {
+    return this.http.post<any>(`${this.url}users/`,body,token).pipe();
   }
 }
 
