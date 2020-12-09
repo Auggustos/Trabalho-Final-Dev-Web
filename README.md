@@ -57,13 +57,6 @@ Se tudo ocorrer bem o frontend estará ouvindo em
 127.0.0.1:4200
 ```
 
-### Criação - banco de dados
-Para criar o banco de dados execute o seguinte comando abaixo no prompt de comando:
-```sh
-mongod --dbpath "C:\<your-dir-to-project>frontend\data"
-```
-
-
 ALUNOS:
 João Pedro Josué - 2018011044
 Rafael Augusto de Souza Silva - 2018001576
