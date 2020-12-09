@@ -12,7 +12,20 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   getGames(): Observable<any> {
-   return this.http.get<any>(`${this.url}games`);
+    return this.http.get<any>(`${this.url}games`);
+  }
+
+  getReview(idGame): Observable<any> {
+    return this.http.get<any>(`${this.url}games/${idGame}`);
+  }
+  criarUser(body): Observable<any> {
+    return this.http.post<any>(`${this.url}users/`,body).pipe();
+  }
+  criarGames(body,token): Observable<any> {
+    return this.http.post<any>(`${this.url}games`,body).pipe();
+  }
+  criarReview(body,token): Observable<any> {
+    return this.http.post<any>(`${this.url}users/`,body,token).pipe();
   }
 }
 

@@ -17,7 +17,7 @@ export class TelaLoginComponent implements OnInit {
 
   loginForm = new FormGroup({
     usuario: new FormControl('', Validators.required),
-    senha: new FormControl('',  [Validators.required,Validators.minLength(6)]),
+    senha: new FormControl('', [Validators.required, Validators.minLength(6)]),
   });
   usuarios: { user: String, senha: String }[] = [];
 
@@ -28,8 +28,11 @@ export class TelaLoginComponent implements OnInit {
   }
 
   verificaUser() {
-
-    this.authService.login(this.loginForm.value.usuario, this.loginForm.value.senha).subscribe(
+    let body = {
+      email: this.loginForm.value.usuario,
+      senha: this.loginForm.value.senha
+    }
+    this.authService.login(body).subscribe(
       success => {
         this.dialogService.showSuccess(`Bem vindo ${this.authService.getUser()}`, "Login Realizado!").then(result => {
           this.router.navigateByUrl('').then(success => location.reload())

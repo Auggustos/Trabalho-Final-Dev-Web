@@ -17,6 +17,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   private setSession(authResult) {
+    console.log(authResult);
     this.response = authResult;
     const token = authResult.token;
     const payload = this.decode(token);
@@ -25,16 +26,8 @@ export class AuthService {
     localStorage.setItem('token', authResult.token);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
     localStorage.setItem('usuario', authResult.user.nome);
-    localStorage.setItem('usuario_id', authResult.user.id);
-    localStorage.setItem('perfil', authResult.user.perfil);
-    localStorage.setItem('userCelular', authResult.user.celular);
+    localStorage.setItem('usuario_id', authResult.user._id);
     localStorage.setItem('userEmail', authResult.user.email);
-    localStorage.setItem('userEndereco', authResult.user.endereco);
-    localStorage.setItem('userPagamentoCartao', authResult.user.pagamento_cartao);
-    localStorage.setItem('userSobrenome', authResult.user.sobrenome);
-    localStorage.setItem('carrinho', '');
-
-
   }
 
   private decode(token: string) {
@@ -49,7 +42,12 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  login(usuario: string, senha: string) {
+  login(body): Observable<any> {
+    return this.http.post<any>(`${this.apiRoot}users/login`,body).pipe(
+      tap(response => this.setSession(response)),
+    );
+  }
+/*   login(usuario: string, senha: string) {
     return this.http.post(
       this.apiRoot.concat('sessions'),
       { usuario, senha }
@@ -58,7 +56,7 @@ export class AuthService {
       shareReplay(),
     );
   }
-
+ */
   signup(username: string, email: string, password1: string, password2: string) {
     // TODO: implement signup
   }
@@ -67,6 +65,9 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('expires_at');
     localStorage.removeItem('carrinho');
+    localStorage.removeItem('usuario');
+    localStorage.removeItem('usuario_id');
+    localStorage.removeItem('userEmail');
   }
 
   refreshToken() {

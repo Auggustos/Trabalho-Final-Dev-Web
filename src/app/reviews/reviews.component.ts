@@ -13,44 +13,41 @@ import { ModalCadastrarReviewComponent } from '../modal-cadastrar-review/modal-c
 })
 export class ReviewsComponent implements OnInit {
   reviews = [];
-  nomeGame = '';
+  idGame = '';
   url = "http://localhost:3000/";
   constructor(private http: HttpClient, private apiService: ApiService, private authService: AuthService, private dialogService: DialogService, private router: Router,
     public dialog: MatDialog, private route: ActivatedRoute) {
-    this.route.params.subscribe(params => this.nomeGame = params['id']);
-    this.nomeGame = this.nomeGame.replace('%20', ' ');
-    console.log(this.nomeGame);
+    this.route.params.subscribe(params => this.idGame = params['id']);
   }
 
-
   ngOnInit(): void {
-    this.http.get(`${this.url}reviews`)
+    this.apiService.getReview(this.idGame)
       .subscribe(response => {
         console.log(response)
         let reviewsAux;
         reviewsAux = response;
-        reviewsAux.forEach(review => {
-          if (review.nome == this.nomeGame) {
+        if(reviewsAux){
+          reviewsAux.forEach(review => {
             this.reviews.push(review)
-          }
-        })
+          })
+        }
         console.log(this.reviews)
       })
   }
 
-  cadastraReview(){
-/*     if (!this.authService.isLoggedIn()) {
-      this.dialogService.showWarning("Você precisa estar logado para adicionar algum item ao carrinho!", "Autentique-se!").then(result => {
-        this.router.navigateByUrl('login').then(success => location.reload())
-      })
-    } else { */
-      this.dialog.open(ModalCadastrarReviewComponent, {
-        width: '20%',
-        height: '601px',
-        data: {
-          nomeGame: this.nomeGame,
-        }
-      });
+  cadastraReview() {
+    /*     if (!this.authService.isLoggedIn()) {
+          this.dialogService.showWarning("Você precisa estar logado para adicionar algum item ao carrinho!", "Autentique-se!").then(result => {
+            this.router.navigateByUrl('login').then(success => location.reload())
+          })
+        } else { */
+    this.dialog.open(ModalCadastrarReviewComponent, {
+      width: '20%',
+      height: '601px',
+      data: {
+        nomeGame: this.idGame,
+      }
+    });
     //}
   }
 

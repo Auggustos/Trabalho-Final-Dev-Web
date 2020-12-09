@@ -22,19 +22,22 @@ export class XboxComponent implements OnInit {
   options: any[] = [];
   filteredOptions: Observable<string[]>;
   games = [];
-
+  idUser ='';
   constructor(private fb: FormBuilder, private http: HttpClient, private apiService: ApiService, private authService: AuthService, private dialogService: DialogService, private router: Router,
     public dialog: MatDialog, private changeDetectorRefs: ChangeDetectorRef) { }
 
   showFiller = false;
 
   ngOnInit(): void {
+    this.idUser = this.authService.getUserId();
     this.apiService.getGames()
       .subscribe(response => {
+        console.log(response)
         let gamesAux;
         gamesAux = response;
         gamesAux.forEach(game => {
-          if (game.console == 'xbox') {
+          if (game.console == '1') {
+            console.log(game)
             this.options.push(game)
             this.games.push(game)
           }
