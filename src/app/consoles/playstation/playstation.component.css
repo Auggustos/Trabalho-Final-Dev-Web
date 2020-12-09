@@ -73,3 +73,11 @@ body {
 .mat-content {
     margin-top: 10px;
 }
+
+.search-bar {
+    margin-left: 2%;
+}
+
+.example-full-width {
+    width: 40%;
+}

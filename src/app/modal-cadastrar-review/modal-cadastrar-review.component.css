@@ -1,0 +1,21 @@
+.example-full-width {
+    width: 100%;
+}
+
+.buttons {
+    display: inline-block;
+}
+
+.button-voltar {
+    width: 100px;
+    margin-left: 68px;
+    background-color: #b24c4c;
+    color: white;
+}
+
+.button-cadastrar {
+    width: 100px;
+    margin-left: 60%;
+    background-color: #4CB258;
+    color: white;
+}

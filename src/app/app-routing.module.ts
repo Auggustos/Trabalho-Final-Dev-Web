@@ -8,11 +8,22 @@ import { SwitchComponent } from './consoles/switch/switch.component';
 import { PcComponent } from './consoles/pc/pc.component';
 import { CadastraJogoComponent } from './cadastra-jogo/cadastra-jogo.component';
 import { ReviewsComponent } from './reviews/reviews.component';
+import { TelaLoginComponent } from './tela-login/tela-login.component';
+import { CadastraUsuarioComponent } from './cadastra-usuario/cadastra-usuario.component';
+import { TelaInicialComponent } from './tela-inicial/tela-inicial.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: XboxComponent
+    component: TelaInicialComponent
+  },
+  {
+    path: 'usuario/cadastra',
+    component: CadastraUsuarioComponent
+  },
+  {
+    path: 'login',
+    component: TelaLoginComponent
   },
   {
     path: 'xbox',

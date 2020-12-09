@@ -5,6 +5,7 @@ import { ApiService } from '../shared/services/api.service'
 import { AuthService } from '../shared/services/auth.service';
 import { DialogService } from '../shared/services/dialog/dialog.service';
 import { ActivatedRoute, Router } from "@angular/router";
+import { ModalCadastrarReviewComponent } from '../modal-cadastrar-review/modal-cadastrar-review.component';
 @Component({
   selector: 'app-reviews',
   templateUrl: './reviews.component.html',
@@ -35,6 +36,22 @@ export class ReviewsComponent implements OnInit {
         })
         console.log(this.reviews)
       })
+  }
+
+  cadastraReview(){
+/*     if (!this.authService.isLoggedIn()) {
+      this.dialogService.showWarning("Você precisa estar logado para adicionar algum item ao carrinho!", "Autentique-se!").then(result => {
+        this.router.navigateByUrl('login').then(success => location.reload())
+      })
+    } else { */
+      this.dialog.open(ModalCadastrarReviewComponent, {
+        width: '20%',
+        height: '601px',
+        data: {
+          nomeGame: this.nomeGame,
+        }
+      });
+    //}
   }
 
 }

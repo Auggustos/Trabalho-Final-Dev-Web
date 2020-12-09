@@ -35,15 +35,15 @@ routes.get('/games', (req, res) => {
         });
 });
 
-routes.patch('/review/:id', (req, res) => {
-    const id = req.params.id;
-    const status = req.body.status;
-    var db = require("./reviews");
-    var Review = db.Mongoose.model('review', db.ReviewSchema, 'review');
-    Review.findByIdAndUpdate(req.params.id, { isEnable: status }).lean().exec(
-        function(e, docs) {
-            res.json(docs);
-        });
+routes.post('/review', (req, res) => {
+    console.log(req)
+        /*  const status = req.body.status;
+         var db = require("./reviews");
+         var Review = db.Mongoose.model('review', db.ReviewSchema, 'review');
+         Review.findByIdAndUpdate(req.params.id, { isEnable: status }).lean().exec(
+             function(e, docs) {
+                 res.json(docs);
+             }); */
 })
 
 routes.delete('/game/:id', (req, res) => {
@@ -60,7 +60,7 @@ routes.post('/game', multer(multerConfig).single("file"), (req, res) => {
 
     const { originalname: name, size, key, location: url = "" } = req.file;
 
-    const {nome, resumo, desenvolvedor, genero, avaliacao, console} = req.body
+    const { nome, resumo, desenvolvedor, genero, avaliacao, console } = req.body
 
     var db = require("./games");
     var Games = db.Mongoose.model('games', db.GamesSchema, 'games');

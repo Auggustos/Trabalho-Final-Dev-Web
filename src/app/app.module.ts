@@ -30,6 +30,11 @@ import { SwitchComponent } from './consoles/switch/switch.component';
 import { PcComponent } from './consoles/pc/pc.component';
 import { CadastraJogoComponent } from './cadastra-jogo/cadastra-jogo.component';
 import { ReviewsComponent } from './reviews/reviews.component';
+import { ModalCadastrarReviewComponent } from './modal-cadastrar-review/modal-cadastrar-review.component';
+import { TelaLoginComponent } from './tela-login/tela-login.component';
+import { CadastraUsuarioComponent } from './cadastra-usuario/cadastra-usuario.component';
+import { TelaInicialComponent } from './tela-inicial/tela-inicial.component';
+
 
 @NgModule({
   declarations: [
@@ -41,8 +46,10 @@ import { ReviewsComponent } from './reviews/reviews.component';
     PcComponent,
     CadastraJogoComponent,
     ReviewsComponent,
-
-
+    ModalCadastrarReviewComponent,
+    TelaLoginComponent,
+    CadastraUsuarioComponent,
+    TelaInicialComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -83,6 +90,7 @@ import { ReviewsComponent } from './reviews/reviews.component';
     DialogService
   ],
   entryComponents: [
+    ModalCadastrarReviewComponent
   ],
   bootstrap: [AppComponent]
 })
