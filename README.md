@@ -1,27 +1,44 @@
-# SistemaHortiFruti
+# Trabalho final 🚀
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.7.
 
-## Development server
+Trabalho final desenvolvido para a disciplina de Desenvolvimento de Sistemas na Web
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### Instalação - Backend
 
-## Code scaffolding
+O backend precisa do [Node.js](https://nodejs.org) e [MongoDB](https://docs.mongodb.com/manual/installation/) para rodar
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Clone o repositório instale as dependencias e inicie o servidor.
+Execute os seguintes comando no cmd (prompt de comando):
 
-## Build
+```sh
+$ cd backend
+$ npm install
+$ cd src
+$ node server
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Se tudo ocorrer bem o servidor estará esperando por requisições em
+```sh
+127.0.0.1:3000
+```
+### Instalação - Frontend
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Clone o repositório instale as dependencias e inicie o frontend.
+Execute os seguintes comando no cmd (prompt de comando):
+```sh
+$ cd frontend
+$ npm install
+$ ng serve
+```
 
-## Running end-to-end tests
+Se tudo ocorrer bem o frontend estará ouvindo em
+```sh
+127.0.0.1:4200
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+### Criação - banco de dados
+Para criar o banco de dados execute o seguinte comando abaixo no prompt de comando:
+```sh
+mongod --dbpath "C:\<your-dir-to-project>frontend\data"
+```
