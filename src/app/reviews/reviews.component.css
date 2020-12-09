@@ -29,10 +29,12 @@
 .container-card {
     margin-left: 15px;
     margin-right: 15px;
+    margin-bottom: 5px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-column-gap: 10px;
     grid-row-gap: 10px;
+    display: inline;
 }
 
 .mat-drawer-content {
@@ -80,5 +82,5 @@ body {
 }
 
 .example-card {
-    width: 500%;
+    width: 98%;
 }

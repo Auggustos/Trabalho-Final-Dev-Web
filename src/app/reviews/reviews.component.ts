@@ -26,15 +26,15 @@ export class ReviewsComponent implements OnInit {
     this.gameObj = JSON.parse(this.authService.getGame());
     this.apiService.getReview(this.idGame)
       .subscribe(response => {
-        console.log(response)
-        let reviewsAux;
+        console.log(response.reviews)
+        this.reviews = response.reviews
+/*         let reviewsAux;
         reviewsAux = response;
-        if(reviewsAux){
+        if(reviewsAux.length>0){
           reviewsAux.forEach(review => {
             this.reviews.push(review)
           })
-        }
-        console.log(this.reviews)
+        } */
       })
   }
 

@@ -14,7 +14,7 @@ export class ApiService {
   }
 
   getReview(idGame): Observable<any> {
-    return this.http.get<any>(`${this.url}/games/${idGame}`);
+    return this.http.get<any>(`${this.url}games/${idGame}/reviews`);
   }
   criarUser(body): Observable<any> {
     return this.http.post<any>(`${this.url}users/`,body).pipe();
