@@ -8,5 +8,5 @@ const ensureAuthenticated = require('../middleware/ensureAuthenticated')
 const middleware = [ensureAuthenticated, multer(multerConfig).single("file")]
 router.post('/', middleware, GamesController.create)
 router.get('/:console', GamesController.index)
-router.get('/:id', GamesController.show)
+router.get('/:id/reviews', GamesController.show)
 module.exports = router;

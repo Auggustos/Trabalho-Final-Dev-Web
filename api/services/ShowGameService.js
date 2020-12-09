@@ -6,7 +6,6 @@ module.exports = class ShowGameService {
 
 
   async execute(id) {
-
       const game = await Game
       .findById(id).populate({
         path: 'reviews',
@@ -19,7 +18,6 @@ module.exports = class ShowGameService {
         }
       })
 
-      console.log(id)
 
       return game;
 
