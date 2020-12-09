@@ -1,48 +1,58 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from "@angular/router";
-import { Produto } from '../../classes/produto.class';
 import { ApiService } from '../../shared/services/api.service'
 import { AuthService } from '../../shared/services/auth.service';
 import { DialogService } from '../../shared/services/dialog/dialog.service';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
-
+import { FormControl } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
+import { map, startWith } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-xbox',
   templateUrl: './xbox.component.html',
   styleUrls: ['./xbox.component.css']
 })
+
 export class XboxComponent implements OnInit {
 
+  myControl = new FormControl();
+  options: any[] = [];
+  filteredOptions: Observable<string[]>;
   games = [];
 
-
-  constructor(private http: HttpClient, private apiService: ApiService, private authService: AuthService, private dialogService: DialogService, private router: Router,
-    public dialog: MatDialog) { }
-  produtos: Produto[] = [];
+  constructor(private fb: FormBuilder, private http: HttpClient, private apiService: ApiService, private authService: AuthService, private dialogService: DialogService, private router: Router,
+    public dialog: MatDialog, private changeDetectorRefs: ChangeDetectorRef) { }
 
   showFiller = false;
-
-  quantidadeProduto: { id: string, quantidade: number }[] = [];
-
-  itensSidebar: string[] = ['Meus dados', 'Minhas compras'];
 
   ngOnInit(): void {
     this.apiService.getGames()
       .subscribe(response => {
         let gamesAux;
-
         gamesAux = response;
         gamesAux.forEach(game => {
           if (game.console == 'xbox') {
+            this.options.push(game)
             this.games.push(game)
           }
         })
-        console.log(this.games)
+        this.filteredOptions = this.myControl.valueChanges
+          .pipe(
+            startWith(''),
+            map(value => this._filter(value))
+          );
+          console.log(this.filteredOptions)
       })
   }
 
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.nome.toLowerCase().includes(filterValue));
+  }
 
   toReviews(idGame: string) {
     let url = 'ID/reviews';

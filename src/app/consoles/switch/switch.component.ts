@@ -7,14 +7,18 @@ import { DialogService } from '../../shared/services/dialog/dialog.service';
 //import { ModalVisualizarProdutoComponent } from '../../modais/modal-visualizar-produto/modal-visualizar-produto.component';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
-
+import { FormControl } from '@angular/forms';
+import { map, startWith } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-switch',
   templateUrl: './switch.component.html',
   styleUrls: ['./switch.component.css']
 })
 export class SwitchComponent implements OnInit {
-
+  myControl = new FormControl();
+  options: string[] = [];
+  filteredOptions: Observable<string[]>;
   games = [];
   constructor(private http: HttpClient, private apiService: ApiService, private authService: AuthService, private dialogService: DialogService, private router: Router,
     public dialog: MatDialog) { }
@@ -35,11 +39,23 @@ export class SwitchComponent implements OnInit {
         gamesAux.forEach(game => {
           if (game.console == 'switch') {
             this.games.push(game)
+            this.options.push(game.nome)
           }
         })
+        this.filteredOptions = this.myControl.valueChanges.pipe(
+          startWith(''),
+          map(value => this._filter(value))
+        );
         console.log(this.games)
       })
   }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  }
+
   toReviews(idGame: string) {
     let url = 'ID/reviews';
     this.router.navigateByUrl(url.replace('ID', idGame)).then(success => location.reload())
