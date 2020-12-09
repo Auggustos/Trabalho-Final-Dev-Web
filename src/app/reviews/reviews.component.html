@@ -17,5 +17,5 @@
             </mat-card>
         </div>
     </mat-card-content>
-    <button mat-raised-button class="button-cadastrar" (click)="cadastraReview()">Cadastrar Review</button>
+    <button *ngIf="podeCadastrar" mat-raised-button class="button-cadastrar" (click)="cadastraReview()">Cadastrar Review</button>
 </mat-card>
