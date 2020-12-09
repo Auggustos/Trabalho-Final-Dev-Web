@@ -1,6 +1,6 @@
 <div class="container">
     <mat-form-field>
-        <mat-select (selectionChange)="filterBySelect()" [(ngModel)]="keyword">
+        <mat-select placeholder="Filtrar por:" (selectionChange)="filterBySelect()" [(ngModel)]="keyword">
             <mat-option default *ngFor="let item of keywords" [value]="item">
                 {{item}}
             </mat-option>
