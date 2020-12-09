@@ -75,4 +75,22 @@ routes.post('/game', multer(multerConfig).single("file"), (req, res) => {
     });
 });
 
+routes.post('/users', (req, res) => {
+  const {nome, senha, email} = req.body;
+
+  const createUser;
+  var db = require("./users");
+
+  let User = db.Mongoose.model('users', db.UsersSchema, 'users');
+  let User = new User({ nome, senha, email});
+  User.save(function(err) {
+      if (err) {
+          console.log("Error! " + err.message);
+          return err;
+      } else {
+          res.json(User);
+      }
+  });
+})
+
 module.exports = routes

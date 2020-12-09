@@ -1,34 +1,15 @@
-const routes = require("express").Router();
-const multer = require("multer");
-const multerConfig = require("./config/multer");
+const {Router} = require('express')
 
-const Post = require("./models/Post");
+const usersRouter = require('../routes/users')
+const sessionsRouter = require('../routes/sessions')
+const gamesRouter = require('../routes/games')
+const reviewsRouter = require('../routes/reviews')
 
-routes.get("/posts", async(req, res) => {
-    const posts = await Post.find();
+const routes = Router();
 
-    return res.json(posts);
-});
-
-routes.post("/posts", multer(multerConfig).single("file"), async(req, res) => {
-    const { originalname: name, size, key, location: url = "" } = req.file;
-
-    const post = await Post.create({
-        name,
-        size,
-        key,
-        url
-    });
-
-    return res.json(post);
-});
-
-routes.delete("/posts/:id", async(req, res) => {
-    const post = await Post.findById(req.params.id);
-
-    await post.remove();
-
-    return res.send();
-});
+routes.use('/users', usersRouter)
+routes.use('/sessions', sessionsRouter)
+routes.use('/games', gamesRouter)
+routes.use('/reviews', reviewsRouter)
 
 module.exports = routes;
