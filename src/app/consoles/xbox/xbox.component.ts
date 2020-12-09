@@ -9,7 +9,6 @@ import { FormControl } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-xbox',
@@ -54,6 +53,11 @@ export class XboxComponent implements OnInit {
   }
 
   filterBySelect() : void {
+
+    //clear inputs
+    this.desenvolvedorControl.setValue('')
+    this.nomeControl.setValue('')
+    this.generoControl.setValue('')
     if(this.keyword == "Gênero"){
       this.filteredOptions = this.generoControl.valueChanges
       .pipe(
@@ -73,8 +77,8 @@ export class XboxComponent implements OnInit {
         map(value => this._filter(1, value))
       );
     }else{
-      this.filteredOptions = this.games$
-    }
+      this.filteredOptions = this.games$.pipe(map(res => res.filter(v => v).slice(0,3))
+      )}
   }
 
 
@@ -86,14 +90,14 @@ export class XboxComponent implements OnInit {
 
     const options = [
       "nome",
-      "desenvolveror",
+      "desenvolvedor",
       "genero"
     ]
-    return this.gamesFiltered.filter(option => option[options[op]].toLowerCase().includes(filterValue));
+    return this.gamesFiltered.filter(option => option[options[op]].toLowerCase().includes(filterValue)).slice(0,3);
   }
 
   toReviews(idGame: string) {
-    let url = 'ID/reviews';
+    let url = 'reviews/ID';
     this.router.navigateByUrl(url.replace('ID', idGame)).then(success => location.reload())
   }
   aux;
@@ -106,8 +110,8 @@ export class XboxComponent implements OnInit {
           this.generos.push(item.genero)
         }
 
-        if(!this.desenvolvedores.includes(item.desenvolveror)){
-          this.desenvolvedores.push(item.desenvolveror)
+        if(!this.desenvolvedores.includes(item.desenvolvedor)){
+          this.desenvolvedores.push(item.desenvolvedor)
         }
 
         if(!this.nomes.includes(item.nome)){

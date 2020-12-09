@@ -46,7 +46,7 @@ const routes: Routes = [
     component: CadastraJogoComponent
   },
   {
-    path: ':id/reviews',
+    path: 'reviews/:id',
     component: ReviewsComponent
   },
   {
