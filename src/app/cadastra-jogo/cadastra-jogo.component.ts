@@ -36,9 +36,6 @@ export class CadastraJogoComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    console.log(this.authService.token)
-    console.log(this.authService.getUser());
-  //  this.authService.logout();
   }
   goBack() {
     window.history.back();

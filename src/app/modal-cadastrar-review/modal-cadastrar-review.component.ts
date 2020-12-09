@@ -14,7 +14,7 @@ import { DialogService } from '../shared/services/dialog/dialog.service';
 export class ModalCadastrarReviewComponent implements OnInit {
   url = "http://localhost:3000/";
   constructor( private apiService: ApiService, private dialogService: DialogService,private authService: AuthService,private http: HttpClient,@Inject(MAT_DIALOG_DATA) public data: any) { 
-    console.log(data)
+
   }
 
   reviewForm = new FormGroup({
@@ -29,9 +29,8 @@ export class ModalCadastrarReviewComponent implements OnInit {
   }
 
   cadastraReview(){
-    console.log('entrei')
+
     const body = this.loadBody();
-    console.log(body)
     this.apiService.criarReview(body,this.authService.token).subscribe(success =>{
       this.dialogService.showSuccess(`Review cadastrado com sucesso!`,"Cadastro Concluido").then(result => {
        location.reload()
