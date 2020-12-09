@@ -8,10 +8,13 @@ exports.create = async (req, res, next) => {
 
     const {nome, resumo, desenvolvedor, genero, avaliacao, console} = req.body
 
+
     const createGame = new CreateGameService()
+    const consoleLowered = console.toLowerCase()
+    const generoLowered = genero.toLowerCase()
 
     const game = await createGame.execute({nome, resumo, desenvolvedor,
-      genero, avaliacao, console, url})
+      genero: generoLowered, avaliacao, console: consoleLowered, url})
 
     return res.json(game)
   } catch (e){
@@ -24,9 +27,12 @@ exports.create = async (req, res, next) => {
 exports.index = async (req, res, next) => {
   try{
 
+    const {console} = req.params
+
+
     const listGames = new ListGamesService()
 
-    const games = await listGames.execute()
+    const games = await listGames.execute(console)
 
     return res.json(games)
   } catch (e){

@@ -4,7 +4,8 @@ require("dotenv").config();
 const routes = require('./routes')
 const express = require('express');
 const cors = require('cors');
-//const createDB = require('./createbd');
+const createDB = require('./createbd');
+const Games = require('./models/Game')
 const app = express();
 
 const mongoose = require('mongoose');
@@ -42,10 +43,7 @@ let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Erro na Ligação ao MongoDB'));
 
 
-    /*
-//FUNÇÃO DE VERIFICAÇÃO DA PRÉ EXISTÊNCIA DA COLLECTION E DOS DADOS PARA POPULAR O SELECT
-var db = require("./games");
-var Games = db.Mongoose.model('games', db.GamesSchema, 'games');
+
 Games.find({}).lean().exec(
     function(e, docs) {
         if (docs.length == 0) {
@@ -53,7 +51,5 @@ Games.find({}).lean().exec(
         }
     });
 
-console.log('API funcionando!');
-*/
 app.listen(3000);
 

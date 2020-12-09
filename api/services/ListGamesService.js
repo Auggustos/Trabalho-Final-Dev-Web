@@ -5,12 +5,12 @@ const User = require('../src/models/User');
 module.exports = class ListGamesService {
 
 
-  async execute() {
+  async execute(console) {
+
 
       const games = await Game
-      .find({}).populate({select: 'nota', path: 'reviews', model: Review})
+      .find({console}).populate({select: 'nota', path: 'reviews', model: Review})
 
-      console.log(games)
       let averageGames = 0.0;
       games.forEach((game) => {
         game.reviews.forEach((review) => {
