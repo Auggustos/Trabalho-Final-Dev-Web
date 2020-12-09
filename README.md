@@ -10,6 +10,8 @@ mongod --dbpath "C:\<your-dir-to-project>\backend\data"
 ```
 Com esse comando o mongodb irá armazenar os dados na pasta referida.
 
+<h3>[IMPORTANTE] Windows?, leia aqui!</h5>
+
 Caso você estiver usando Windows e o Mongo estiver como serviço, provavelmente ele não seguirá o caminho acima, pois pega direto da config, porém podemos parar o serviço utilizando:
 ```sh
 net stop MongoDB
