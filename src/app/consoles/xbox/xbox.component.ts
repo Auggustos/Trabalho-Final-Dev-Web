@@ -26,17 +26,21 @@ export class XboxComponent implements OnInit {
   gamesFiltered = []
   keywords = ['Nome', 'Desenvolvedor', 'Gênero'];
   keyword = '';
+  toHighlight: string = '';
 
   myControl = new FormControl();
   options: any[] = [];
   desenvolvedorControl = new FormControl()
   nomeControl = new FormControl()
   generoControl = new FormControl()
+
   filteredOptions: Observable<any[]>;
+  filteredGames: Observable<any[]>;
+
   games = [];
   idUser ='';
-  constructor(private fb: FormBuilder, private http: HttpClient, private apiService: ApiService, private authService: AuthService, private dialogService: DialogService, private router: Router,
-    public dialog: MatDialog, private changeDetectorRefs: ChangeDetectorRef) {
+  constructor(private http: HttpClient, private apiService: ApiService, private authService: AuthService, private dialogService: DialogService, private router: Router,
+    public dialog: MatDialog) {
       this.getGames();
       this.filterBySelect();
 
@@ -62,22 +66,38 @@ export class XboxComponent implements OnInit {
       this.filteredOptions = this.generoControl.valueChanges
       .pipe(
         startWith(''),
-        map(value => this._filter(2, value))
+        map(value => this._filterOption(2, value))
+      );
+      this.filteredGames = this.generoControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filterGame(2, value))
       );
     }else if(this.keyword == "Nome"){
+
       this.filteredOptions = this.nomeControl.valueChanges
       .pipe(
         startWith(''),
-        map(value => this._filter(0, value))
+        map(value => this._filterOption(0, value))
+      );
+      this.filteredGames = this.nomeControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filterGame(0, value))
       );
     }else if(this.keyword == "Desenvolvedor"){
       this.filteredOptions = this.desenvolvedorControl.valueChanges
       .pipe(
         startWith(''),
-        map(value => this._filter(1, value))
+        map(value => this._filterOption(1, value))
+      );
+      this.filteredGames = this.desenvolvedorControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filterGame(1, value))
       );
     }else{
-      this.filteredOptions = this.games$.pipe(map(res => res.filter(v => v).slice(0,3))
+      this.filteredGames = this.games$.pipe(map(res => res.filter(v => v).slice(0,3))
       )}
   }
 
@@ -85,7 +105,23 @@ export class XboxComponent implements OnInit {
   /* 0 - nome
   1 - dev
   2 - genero */
-  private _filter(op: number, value: string): string[] {
+  /* 0 - nome
+  1 - dev
+  2 - genero */
+  private _filterOption(op: number, value: string): string[] {
+    this.toHighlight = value
+    const filterValue = value.toLowerCase();
+
+    const options = [
+      "nomes",
+      "desenvolvedores",
+      "generos"
+    ]
+    return this[options[op]].filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  }
+
+  private _filterGame(op: number, value: string): string[] {
+    this.toHighlight = value
     const filterValue = value.toLowerCase();
 
     const options = [
@@ -95,6 +131,7 @@ export class XboxComponent implements OnInit {
     ]
     return this.gamesFiltered.filter(option => option[options[op]].toLowerCase().includes(filterValue)).slice(0,3);
   }
+
 
   toReviews(idGame: string) {
     let gameObj;
@@ -109,7 +146,6 @@ export class XboxComponent implements OnInit {
     let url = 'reviews/ID';
     this.router.navigateByUrl(url.replace('ID', idGame)).then(success => location.reload())
   }
-  aux;
   filtraArrayProAutoComplete(){
     this.games$.subscribe((responses) => {
       this.gamesFiltered = responses
@@ -131,13 +167,23 @@ export class XboxComponent implements OnInit {
 
     })
 
-
-
-
-
-
   }
 
 
 }
 
+import { PipeTransform, Pipe } from '@angular/core';
+
+@Pipe({ name: 'highlight' })
+export class HighlightPipe implements PipeTransform {
+  transform(text: string, search): string {
+    const pattern = search
+      .replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&")
+      .split(' ')
+      .filter(t => t.length > 0)
+      .join('|');
+    const regex = new RegExp(pattern, 'gi');
+
+    return search ? text.replace(regex, match => `<b>${match}</b>`) : text;
+  }
+}
