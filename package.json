@@ -23,6 +23,7 @@
         "@angular/platform-browser-dynamic": "~10.1.6",
         "@angular/router": "~10.1.6",
         "@types/jwt-decode": "^2.2.1",
+        "angular-ng-autocomplete": "^2.0.1",
         "angular2-text-mask": "^9.0.0",
         "jwt-decode": "^3.0.0",
         "moment": "^2.29.1",

@@ -45,7 +45,7 @@ export class ReviewsComponent implements OnInit {
       width: '20%',
       height: '601px',
       data: {
-        nomeGame: this.idGame,
+        idGame: this.idGame,
       }
     });
     //}
