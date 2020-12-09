@@ -3,7 +3,7 @@
         <mat-form-field class="example-full-width">
             <input type="text" placeholder="Procure um jogo" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
             <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option.nome">
                     {{option.nome}}
                 </mat-option>
             </mat-autocomplete>
