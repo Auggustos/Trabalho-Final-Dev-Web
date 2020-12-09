@@ -14,7 +14,7 @@ export class ApiService {
   }
 
   getReview(idGame): Observable<any> {
-    return this.http.get<any>(`${this.url}games/${idGame}`);
+    return this.http.get<any>(`${this.url}/games/${idGame}`);
   }
   criarUser(body): Observable<any> {
     return this.http.post<any>(`${this.url}users/`,body).pipe();
@@ -23,7 +23,7 @@ export class ApiService {
     return this.http.post<any>(`${this.url}games`,body).pipe();
   }
   criarReview(body,token): Observable<any> {
-    return this.http.post<any>(`${this.url}users/`,body,token).pipe();
+    return this.http.post<any>(`${this.url}reviews/`,body,token).pipe();
   }
 }
 

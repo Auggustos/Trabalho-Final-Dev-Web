@@ -136,17 +136,17 @@ export class AuthService {
     const retorno = localStorage.getItem('userSobrenome');
     return retorno;
   }
-  setCarrinho(carrinho: string) {
-    localStorage.setItem('carrinho', carrinho);
-  }
 
-  getCarrinho() {
-    const retorno = localStorage.getItem('carrinho');
+  setGame(game:string){
+    localStorage.setItem('game',game);
+  }
+  getGame(){
+    const retorno = localStorage.getItem('game');
     return retorno;
   }
 
-  limpaCarrinho() {
-    localStorage.setItem('carrinho', '');
+  limpaGame() {
+    localStorage.setItem('game', '');
   }
 }
 

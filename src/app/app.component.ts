@@ -70,25 +70,5 @@ export class AppComponent implements OnInit {
       this.router.navigate(['/cadastra-jogo']);
     }
   }
-
-  onBadge() {
-    if (this.authService.isLoggedIn()) {
-      if (this.authService.getCarrinho()) {
-        this.carrinho = JSON.parse(this.authService.getCarrinho())
-        if (this.carrinho != null) {
-          let count = 0;
-          this.carrinho.forEach(produto => {
-            count += produto.quantidade;
-          })
-          return count;
-        } else {
-          return '';
-        }
-      }
-    } else {
-      return '';
-    }
-
-  }
 }
 

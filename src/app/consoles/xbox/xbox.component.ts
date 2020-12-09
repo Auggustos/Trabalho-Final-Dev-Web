@@ -97,6 +97,15 @@ export class XboxComponent implements OnInit {
   }
 
   toReviews(idGame: string) {
+    let gameObj;
+    this.gamesFiltered.forEach(game => {
+      if(game._id == idGame){
+        gameObj = game;
+      }
+    })
+    var textoGame = JSON.stringify(gameObj);
+    this.authService.limpaGame();
+    this.authService.setGame(textoGame);
     let url = 'reviews/ID';
     this.router.navigateByUrl(url.replace('ID', idGame)).then(success => location.reload())
   }

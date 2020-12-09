@@ -15,6 +15,7 @@ export class ReviewsComponent implements OnInit {
   reviews = [];
   idGame = '';
   nomeGame = '';
+  gameObj: any;
   url = "http://localhost:3000/";
   constructor(private http: HttpClient, private apiService: ApiService, private authService: AuthService, private dialogService: DialogService, private router: Router,
     public dialog: MatDialog, private route: ActivatedRoute) {
@@ -22,6 +23,7 @@ export class ReviewsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.gameObj = JSON.parse(this.authService.getGame());
     this.apiService.getReview(this.idGame)
       .subscribe(response => {
         console.log(response)
@@ -46,6 +48,7 @@ export class ReviewsComponent implements OnInit {
       width: '20%',
       height: '601px',
       data: {
+        consoleGame: this.gameObj.console,
         idGame: this.idGame,
         nomeGame: this.nomeGame,
       }
