@@ -16,7 +16,7 @@ export class CadastraJogoComponent implements OnInit {
   constructor(private dialogService: DialogService, private router: Router, private apiSevice: ApiService, private authService: AuthService) { }
   url = "http://localhost:3000/";
   uploadData = new FormData();
-
+  generos = [ 'ação','aventura', 'estratégia', 'RPG', 'esporte','simulação'];
   selectedFile: File
 
   imageSrc: any;

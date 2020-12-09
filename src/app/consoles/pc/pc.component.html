@@ -1,9 +1,11 @@
 <div class="container">
-
-    <select (change)="filterBySelect()" [(ngModel)]="keyword">
-      <option default *ngFor="let item of keywords" [value]="item">{{item}}</option>
-    </select>
-
+    <mat-form-field>
+        <mat-select (selectionChange)="filterBySelect()" [(ngModel)]="keyword">
+            <mat-option default *ngFor="let item of keywords" [value]="item">
+                {{item}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
     <mat-form-field class="example-full-width" *ngIf="keyword == 'Nome'">
         <input type="text" placeholder="Digite um nome." aria-label="Name" matInput [formControl]="nomeControl" [matAutocomplete]="auto1">
         <mat-autocomplete #auto1="matAutocomplete">
