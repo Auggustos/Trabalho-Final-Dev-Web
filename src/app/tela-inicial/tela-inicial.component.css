@@ -1,0 +1,29 @@
+.example-card {
+    margin-top: 2%;
+}
+
+.paragrafo {
+    text-align: center;
+}
+
+.xbox-card {
+    background-color: #499229;
+    margin-top: 2%;
+}
+
+.playstation-card {
+    background-color: #4E515A;
+    color: white;
+    margin-top: 2%;
+}
+
+.switch-card {
+    background-color: #E90111;
+    color: white;
+    margin-top: 2%;
+}
+
+.pc-card {
+    background-color: #6C73E8;
+    margin-top: 2%;
+}
