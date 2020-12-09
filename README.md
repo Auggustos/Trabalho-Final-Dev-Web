@@ -56,6 +56,7 @@ Se tudo ocorrer bem o frontend estará ouvindo em
 ```sh
 127.0.0.1:4200
 ```
+AVISO: CASO POSSUA ALGUM ERRO AO CRIAR JOGO OU REVIEW PODE SER PROBLEMA DE SESSÃO, TENTE DESLOGAR E RELOGAR!
 
 ALUNOS:
 João Pedro Josué - 2018011044
