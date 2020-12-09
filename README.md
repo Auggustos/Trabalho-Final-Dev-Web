@@ -16,6 +16,7 @@ Caso você estiver usando Windows e o Mongo estiver como serviço, provavelmente
 ```sh
 net stop MongoDB
 ```
+(com o prompt de comando sendo executado como administrador - importante)
 
 Após isso basta executar o mesmo comando acima:
 ```sh
