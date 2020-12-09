@@ -10,8 +10,8 @@
                         <mat-form-field class="example-full-width">
                             <mat-label>Console</mat-label>
                             <mat-select formControlName="console">
-                                <mat-option *ngFor="let console of consoles" [value]="console.value">
-                                    {{console.texto}}
+                                <mat-option *ngFor="let console of consoles" [value]="console">
+                                    {{console}}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>

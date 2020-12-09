@@ -23,7 +23,7 @@ export class CadastraJogoComponent implements OnInit {
 
   hide = true;
 
-  consoles = [{ texto: 'Xbox', value: 1 }, { texto: 'Playstation', value: 2 }, { texto: 'Switch', value: 3 }, { texto: 'PC', value: 4 }];
+  consoles = ['Xbox','Playstation','Switch','PC',];
   produto: Produto;
 
   gameForm = new FormGroup({
@@ -64,7 +64,7 @@ export class CadastraJogoComponent implements OnInit {
   onUpload() {
      const uploadData = new FormData();
     uploadData.append('file', this.selectedFile);
-    uploadData.append('titulo', this.gameForm.value.titulo);
+    uploadData.append('nome', this.gameForm.value.titulo);
     uploadData.append('resumo', this.gameForm.value.resumo);
     uploadData.append('desenvolvedor', this.gameForm.value.desenvolvedor);
     uploadData.append('genero', this.gameForm.value.genero);

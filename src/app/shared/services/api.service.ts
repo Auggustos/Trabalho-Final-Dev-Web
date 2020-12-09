@@ -20,7 +20,7 @@ export class ApiService {
     return this.http.post<any>(`${this.url}users/`,body).pipe();
   }
   criarGames(body,token): Observable<any> {
-    return this.http.post<any>(`${this.url}games`,body).pipe();
+    return this.http.post<any>(`${this.url}games`,body,token).pipe();
   }
   criarReview(body,token): Observable<any> {
     return this.http.post<any>(`${this.url}reviews/`,body,token).pipe();

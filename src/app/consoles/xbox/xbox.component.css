@@ -45,6 +45,7 @@ body {
 
 .mat-form-field {
     margin-right: 12px;
+    margin-left: 16px;
 }
 
 .button-adicionar-carrinho {
@@ -80,4 +81,8 @@ body {
 
 .example-full-width {
     width: 40%;
+}
+
+.select {
+    margin-left: 10%;
 }
