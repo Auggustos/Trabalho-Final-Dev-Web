@@ -62,7 +62,13 @@ export class AppComponent implements OnInit {
   }
 
   toCadastra() {
-    this.router.navigate(['/cadastra-jogo']);
+    if (!this.authService.isLoggedIn()) {
+      this.dialogService.showWarning("Você precisa estar logado para cadastrar algum jogo!", "Autentique-se!").then(result => {
+        this.router.navigateByUrl('login').then(success => location.reload())
+      })
+    } else {
+      this.router.navigate(['/cadastra-jogo']);
+    }
   }
 
   onBadge() {

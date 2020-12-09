@@ -73,7 +73,7 @@ export class CadastraJogoComponent implements OnInit {
     this.apiSevice.criarGames(uploadData,this.authService.token)
       .subscribe(
         success => {
-          this.dialogService.showSuccess(`${this.gameForm.value.nome} cadastrado com sucesso!`, "Jogo Cadastrado!").then(result => {
+          this.dialogService.showSuccess(`${this.gameForm.value.titulo} cadastrado com sucesso!`, "Jogo Cadastrado!").then(result => {
             this.router.navigateByUrl('').then(success => location.reload())
           });
         },
